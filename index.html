@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3ee">
+  <title>경험은 나를 성장시키는 발판이다</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f3ee;
+      --ink: #202b2a;
+      --muted: #5f6b69;
+      --green: #225f55;
+      --lime: #d6ed9c;
+      --line: rgba(32,43,42,.16);
+      --card: #fffefa;
+      --serif: "Iowan Old Style", "Palatino Linotype", "Noto Serif KR", Georgia, serif;
+      font-family: Inter, "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); }
+    a { color: inherit; }
+    button { font: inherit; }
+    .wrap { width: min(1180px, calc(100% - 56px)); margin: auto; }
+    header { height: 68px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); }
+    .brand { display:flex; gap:12px; align-items:center; font-size:13px; font-weight:750; letter-spacing:.04em; }
+    .brand-mark { width:30px; height:30px; display:grid; place-items:center; background:var(--green); color:white; border-radius:50%; font-family:var(--serif); }
+    .nav { display:flex; gap:28px; font-size:12px; color:var(--muted); }
+    .nav a { text-decoration:none; }
+    .nav a:hover, .nav a:focus-visible { color:var(--green); text-decoration:underline; text-underline-offset:4px; }
+    main { padding: 20px 0 40px; }
+    .hero { display:grid; grid-template-columns: 1.25fr .75fr; gap:40px; align-items:end; padding: 24px 0 28px; }
+    .eyebrow { color:var(--green); text-transform:uppercase; font-size:11px; font-weight:800; letter-spacing:.16em; }
+    h1 { font-family:var(--serif); font-size:clamp(42px,5.2vw,72px); line-height:1.1; letter-spacing:-.055em; font-weight:500; max-width:760px; margin:18px 0 20px; }
+    .intro { color:var(--muted); font-size:15px; line-height:1.9; max-width:600px; margin:0; }
+    .hero-aside { border-left:1px solid var(--line); padding: 8px 0 8px 25px; }
+    .aside-label { color:var(--muted); font-size:11px; letter-spacing:.12em; text-transform:uppercase; }
+    .aside-quote { font-family:var(--serif); font-size:22px; line-height:1.55; margin:14px 0 0; }
+    .section-head { display:flex; align-items:end; justify-content:space-between; border-top:1px solid var(--line); padding-top:22px; margin-bottom:18px; }
+    h2 { font-family:var(--serif); font-weight:500; font-size:27px; letter-spacing:-.03em; margin:0; }
+    .section-note { color:var(--muted); font-size:12px; margin:0; }
+    .stories { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .story { width:100%; min-height:230px; background:var(--green); border:1px solid var(--green); border-radius:5px; padding:22px; display:flex; flex-direction:column; }
+    .story-top { display:flex; justify-content:space-between; color:var(--green); font-size:11px; font-weight:800; letter-spacing:.08em; }
+    .story h3 { font-family:var(--serif); font-size:25px; font-weight:500; letter-spacing:-.03em; margin:25px 0 9px; }
+    .story p { color:var(--muted); font-size:13px; line-height:1.75; margin:0 0 20px; }
+    .reveal { flex:1; width:100%; display:flex; align-items:center; justify-content:center; border:0; background:transparent; color:#fff; text-align:center; cursor:pointer; padding:0; font-size:12px; font-weight:800; }
+    .reveal:focus-visible { outline:3px solid #9bc65a; outline-offset:4px; }
+    .word { font-family:"Arial Rounded MT Bold", "Pretendard", "Noto Sans KR", sans-serif; font-size:29px; font-weight:800; color:#fff; letter-spacing:.03em; }
+    .reveal .plus { display:none; }
+    .reveal .plus { font-size:20px; line-height:1; transition:transform .2s ease; }
+    .reveal[aria-expanded="true"] .plus { transform:rotate(45deg); }
+    .details { display:none; color:var(--ink); font-size:12px; line-height:1.75; margin:12px 0 0; padding:12px; background:#f3f6eb; border-radius:4px; }
+    .details.open { display:block; }
+    .contact { margin-top:30px; border-top:1px solid var(--line); padding-top:22px; }
+    .contact-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+    .contact-item { background:var(--card); border:1px solid var(--line); border-radius:5px; padding:16px 18px; }
+    .contact-item small { display:block; color:var(--muted); font-size:10px; letter-spacing:.12em; text-transform:uppercase; }
+    .contact-item span, .contact-item a { display:block; color:var(--green); font-size:14px; font-weight:700; margin-top:8px; text-decoration:none; overflow-wrap:anywhere; }
+    .contact-item a:hover, .contact-item a:focus-visible { text-decoration:underline; text-underline-offset:3px; }
+    .prompt { margin-top:34px; display:flex; align-items:center; justify-content:space-between; gap:24px; background:var(--green); color:#fff; border-radius:5px; padding:22px 26px; }
+    .prompt small { color:#c9dfd4; letter-spacing:.11em; font-size:10px; text-transform:uppercase; }
+    .prompt p { margin:7px 0 0; font-family:var(--serif); font-size:23px; }
+    .prompt .arrow { font-size:26px; color:var(--lime); }
+    footer { border-top:1px solid var(--line); padding:20px 0 28px; display:flex; justify-content:space-between; color:var(--muted); font-size:11px; }
+    @media (max-width:760px) {
+      .wrap { width:min(100% - 36px, 560px); }
+      header { height:68px; }
+      .nav { gap:14px; font-size:11px; }
+      main { padding-top:20px; }
+      .hero { grid-template-columns:1fr; gap:25px; padding:34px 0 38px; }
+      h1 { font-size:clamp(41px,11vw,58px); }
+      .hero-aside { border-left:0; border-top:1px solid var(--line); padding:18px 0 0; }
+      .aside-quote { font-size:19px; }
+      .section-head { align-items:start; flex-direction:column; gap:7px; }
+      .stories { grid-template-columns:1fr; }
+      .contact-grid { grid-template-columns:1fr; }
+      .story { min-height:210px; }
+      .prompt { padding:18px; }
+      .prompt p { font-size:19px; }
+      footer { gap:12px; flex-wrap:wrap; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#top" aria-label="성장 기록, 맨 위로">
+        <span class="brand-mark" aria-hidden="true">G</span><span>GROWING NOTES</span>
+      </a>
+      <nav class="nav" aria-label="페이지 메뉴">
+        <a href="#about">소개</a><a href="#stories">성장 기록</a><a href="#contact">연락처</a>
+      </nav>
+    </header>
+    <main id="top">
+      <section class="hero" id="about" aria-labelledby="page-title">
+        <div>
+          <div class="eyebrow">A note on becoming</div>
+          <h1 id="page-title">경험은 나를<br>성장시키는 발판이다.</h1>
+          <p class="intro">이 페이지는 저를 알아가고 싶은 방문자에게 팀 프로젝트와 학습 경험을 통해 성장해 온 모습을 소개합니다.</p>
+        </div>
+        <aside class="hero-aside">
+          <div class="aside-label">My point of view</div>
+          <p class="aside-quote">“완성된 모습보다<br>계속 자라는 과정을 나눕니다.”</p>
+        </aside>
+      </section>
+      <section id="stories" aria-labelledby="stories-title">
+        <div class="section-head">
+          <h2 id="stories-title">나의 장점</h2>
+        </div>
+        <div class="stories">
+          <article class="story">
+            <button class="reveal" aria-expanded="false" aria-controls="detail-1"><span class="word">도전</span><span class="plus" aria-hidden="true">+</span></button>
+            <div class="details" id="detail-1">대학교 팀 프로젝트에서 팀원들과 다른 대회에도 도전해 보자고 뜻을 모아 콘텐츠 학회에 출품했고, 최우수상을 받았습니다.</div>
+          </article>
+          <article class="story">
+            <button class="reveal" aria-expanded="false" aria-controls="detail-2"><span class="word">협력</span><span class="plus" aria-hidden="true">+</span></button>
+            <div class="details" id="detail-2">대학교 시험 기간에 동기와 함께 공부했습니다. 서로 어려워하는 과목이 달라 각자 잘 아는 내용을 알려 주며 공부했고, 그 결과 둘 다 A+을 받았습니다.</div>
+          </article>
+          <article class="story">
+            <button class="reveal" aria-expanded="false" aria-controls="detail-3"><span class="word">적응</span><span class="plus" aria-hidden="true">+</span></button>
+            <div class="details" id="detail-3">팀 프로젝트 때 몰랐던 부분을 강사님의 도움을 받아 배우고 빠르게 적응해, 프로젝트를 정해진 시간 안에 마무리하면서 한층 성장한 것 같습니다.</div>
+          </article>
+        </div>
+      </section>
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="section-head"><h2 id="contact-title">연락하기</h2><p class="section-note">궁금한 점이 있다면 편하게 연락해 주세요.</p></div>
+        <div class="contact-grid">
+          <div class="contact-item"><small>Name</small><span>윤승근</span></div>
+          <div class="contact-item"><small>Email</small><a href="mailto:yoonsg0124@naver.com">yoonsg0124@naver.com</a></div>
+          <div class="contact-item"><small>Phone</small><a href="tel:+821057519120">010-5751-9120</a></div>
+        </div>
+      </section>      <section class="prompt" aria-label="페이지의 핵심 메시지">
+        <div><small>A thought to carry forward</small><p>경험은 나를 성장시키는 발판이다.</p></div><span class="arrow" aria-hidden="true">↗</span>
+      </section>
+    </main>
+    <footer><span>GROWING NOTES · 개인 소개</span><span>경험을 기록하고, 다음을 향해.</span></footer>
+  </div>
+  <script>
+    document.querySelectorAll(".reveal").forEach((button) => {
+      button.addEventListener("click", () => {
+        const expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        document.getElementById(button.getAttribute("aria-controls")).classList.toggle("open", !expanded);
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
